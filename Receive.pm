@@ -6,8 +6,8 @@
 
 package Net::SMTP::Receive;
 
-use vars($VERSION);
-$VERSION = 0.2;
+use vars qw($VERSION);
+$VERSION = 0.3;
 
 use strict;
 use Socket;
