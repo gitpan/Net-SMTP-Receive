@@ -7,7 +7,7 @@
 package Net::SMTP::Receive;
 
 use vars($VERSION);
-$VERSION = 0.1;
+$VERSION = 0.2;
 
 use strict;
 use Socket;
@@ -156,7 +156,7 @@ sub default_delivery_error { 554; }
 sub help
 {
 	return <<END;
-214-This is the perl module Net::STMP::Receive version $version
+214-This is the perl module Net::STMP::Receive version $VERSION
 214-
 214-It supports the following normal SMTP commands:
 214-    HELO   MAIL   RCPT   DATA
@@ -303,7 +303,7 @@ sub talk
 
 	my $hostname = $server->hostname();
 	my $date = strftime("%c GMT", gmtime(time));
-	print $client "220 $hostname ESMTP Net::SMTP::Receive $version; $date\r\n";
+	print $client "220 $hostname ESMTP Net::SMTP::Receive $VERSION; $date\r\n";
 
 	$server->reset();
 
@@ -483,7 +483,7 @@ sub data
 	my $h1 = $server->{'PEERADDR'} || $h0;
 	my $h2 = $server->{'HELO'} || $h1;
 
-	push(@msg, "Received: from $h2 ($h1 [$h0]) by $h3 ($version); $date\n");
+	push(@msg, "Received: from $h2 ($h1 [$h0]) by $h3 ($VERSION); $date\n");
 	while(<$client>) {
 		if ($eight ? ($p && $_ eq ".\r\n") : /^\.[\r\n]*$/) {
 			if ($len >= $server->max_datalength) {
